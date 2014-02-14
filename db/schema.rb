@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214144250) do
+ActiveRecord::Schema.define(version: 20140214174232) do
+
+  create_table "books", force: true do |t|
+    t.string   "title"
+    t.string   "author"
+    t.text     "short_description"
+    t.text     "long_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "chapters", force: true do |t|
+    t.integer  "book_id"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

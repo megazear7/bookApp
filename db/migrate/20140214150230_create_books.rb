@@ -5,7 +5,6 @@ class CreateBooks < ActiveRecord::Migration
       t.string :author
       t.text :short_description
       t.text :long_description
-      vvvv#before rake db:migrate add has_many relationship
       t.timestamps
     end
   end
