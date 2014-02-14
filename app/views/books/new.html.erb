@@ -14,6 +14,21 @@
   <%= b.label :long_description %>
   <%= b.text_field :long_description %><br/><br/>
 
+  <%= b.fields_for :chapters do |c| %>
+    <%= c.label :title %>
+    <%= c.text_field :title %><br/>
+
+    <%= c.label :chapter %>
+    <%= c.text_field :chapter %><br/>
+
+    <%= c.label :position %>
+    <%= c.text_field :position %><br/>
+  <% end %>
+
+  <!-- this is broken, I need to make a helper for this, there is a rails cast for it %>
+  <p><%= link_to_add_fields "Add Chapter", b, :chapters %></p>
+
+
   <%= b.submit %>
 
 <% end %>
