@@ -1,0 +1,19 @@
+<h1>This is the new book page</h1>
+
+<%= form_for @book do |b| %>
+
+  <%= b.label :title %>
+  <%= b.text_field :title %><br/><br/>
+
+  <%= b.label :author %>
+  <%= b.text_field :author %><br/><br/>
+
+  <%= b.label :short_description %>
+  <%= b.text_field :short_description %><br/><br/>
+
+  <%= b.label :long_description %>
+  <%= b.text_field :long_description %><br/><br/>
+
+  <%= b.submit %>
+
+<% end %>
