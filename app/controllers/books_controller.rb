@@ -17,7 +17,7 @@ class BooksController < ApplicationController
       redirect_to new_user_session_path
     end
 
-    @book = Book.create(book_params)
+    @book = @user.books.create(book_params)
     @book.save
     redirect_to book_path(@book)
   end
@@ -32,7 +32,7 @@ class BooksController < ApplicationController
 
   private
    def book_params
-      params.require(:book).permit(:title, :author, :short_description, :long_description, :user_id)
+      params.require(:book).permit(:title, :author, :short_description, :long_description)
    end
 
   private
