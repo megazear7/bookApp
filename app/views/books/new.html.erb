@@ -1,34 +1,25 @@
 <h1>This is the new book page</h1>
 
-<%= form_for @book do |b| %>
+<%= form_for @book do |f| %>
 
-  <%= b.label :title %>
-  <%= b.text_field :title %><br/><br/>
+  <%= f.label :title %>
+  <%= f.text_field :title %><br/><br/>
 
-  <%= b.label :author %>
-  <%= b.text_field :author %><br/><br/>
+  <%= f.label :author %>
+  <%= f.text_field :author %><br/><br/>
 
-  <%= b.label :short_description %>
-  <%= b.text_field :short_description %><br/><br/>
+  <%= f.label :short_description %>
+  <%= f.text_field :short_description %><br/><br/>
 
-  <%= b.label :long_description %>
-  <%= b.text_field :long_description %><br/><br/>
+  <%= f.label :long_description %>
+  <%= f.text_field :long_description %><br/><br/>
 
-  <%= b.fields_for :chapters do |c| %>
-    <%= c.label :title %>
-    <%= c.text_field :title %><br/>
-
-    <%= c.label :chapter %>
-    <%= c.text_field :chapter %><br/>
-
-    <%= c.label :position %>
-    <%= c.text_field :position %><br/>
+  <%= f.fields_for :chapters do |builder | %>
+    <%= render 'chapter_fields', f: builder %>
   <% end %>
 
-  <!-- this is broken, I need to make a helper for this, there is a rails cast for it %>
-  <p><%= link_to_add_fields "Add Chapter", b, :chapters %></p>
+  <p><%= link_to_add_fields "Add Chapter", f, :chapters %></p>
 
-
-  <%= b.submit %>
+  <%= f.submit %>
 
 <% end %>
