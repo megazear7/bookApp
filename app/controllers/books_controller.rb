@@ -30,6 +30,17 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def destroy
+    if user_signed_in? 
+      @user = current_user
+    else
+      redirect_to new_user_session_path
+    end
+
+    @user.books.destroy(params[:id])
+    redirect_to user_path(@user)
+  end
+
   private
    def book_params
       params.require(:book).permit(:title, :author, :short_description, :long_description)

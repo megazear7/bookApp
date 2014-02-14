@@ -1,6 +1,7 @@
 <% @books.each do |b| %>
   <h1><%= b.title  %></h1>
   <p>Author: <%= b.author  %></p>
+  <%= link_to "Read This Book", book_path(b), :method => :get %>
   <br/>
   <br/>
  <% end %>

@@ -1,2 +1,7 @@
 <h1><%= @book.title  %></h1>
 <p>Author: <%= @book.author  %></p>
+
+<% @book.chapters.each do |c| %>
+  <p>Chapter <%= c.position %>: <%= c.title %></p>
+  <p><%= c.content %></p>
+<% end %>

@@ -3,6 +3,8 @@
 <% @user.books.each do |b| %>
   <h1><%= b.title  %></h1>
   <p>Author: <%= b.author  %></p>
+  <%= link_to "Read This Book", book_path(b), :method => :get %>
+  <%= link_to "Delete This Book", book_path(b), :method => :delete, :data => { confirm: "Are you sure?" } %>
   <br/>
   <br/>
 <% end %>
