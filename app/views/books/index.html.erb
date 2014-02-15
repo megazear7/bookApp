@@ -1,14 +1,20 @@
-<%= will_paginate @books %>
+<div class="page_item">
+  <h1>Browse Books:</h1>
+  <%= will_paginate @books %>
+</div>
 
 <% @books.each do |b| %>
-  <h1><%= b.title  %></h1>
-  <p>Author: <%= b.author  %></p>
-  <%= link_to "Read", book_path(b), :method => :get %> |
-  <%= link_to "Delete", book_path(b), :method => :delete, :data => { confirm: "Are you sure?" } %>
-  <% if ! @user.books.where(id: b.id).empty? %>
-    | <%= link_to "Edit", edit_book_path(b), :method => :get %>
-  <% end %>
-
-  <br/>
-  <br/>
+  <div class="page_item book_overview">
+    <h2><%= b.title  %></h2>
+    <p>Author: <%= b.author  %></p>
+    <%= link_to "Read", book_path(b), :method => :get %> |
+    <%= link_to "Delete", book_path(b), :method => :delete, :data => { confirm: "Are you sure?" } %>
+    <% if ! @user.books.where(id: b.id).empty? %>
+      | <%= link_to "Edit", edit_book_path(b), :method => :get %>
+    <% end %>
+  </div>
 <% end %>
+
+<div class="page_item">
+  <%= will_paginate @books %>
+</div>

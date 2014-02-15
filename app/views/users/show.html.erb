@@ -1,15 +1,23 @@
-<p>Your Email: <%= @user.email %></p>
-
-<%= will_paginate @books %>
+<div class="page_item">
+  <h1>Your Books:</h1>
+  <%= will_paginate @books %>
+</div>
 
 <% @books.each do |b| %>
-  <h1><%= b.title  %></h1>
-  <p>Author: <%= b.author  %></p>
-  <%= link_to "Read", book_path(b), :method => :get %> |
-  <%= link_to "Delete", book_path(b), :method => :delete, :data => { confirm: "Are you sure?" } %> |
-  <%= link_to "Edit", edit_book_path(b), :method => :get %>
-  <br/>
-  <br/>
+  <div class="page_item book_overview">
+    <h2><%= b.title  %></h2>
+    <p>Author: <%= b.author  %></p>
+    <%= link_to "Read", book_path(b), :method => :get %> |
+    <%= link_to "Delete", book_path(b), :method => :delete, :data => { confirm: "Are you sure?" } %> |
+    <%= link_to "Edit", edit_book_path(b), :method => :get %>
+  </div>
 <% end %>
 
-<%= link_to "Edit User Info", edit_user_registration_path, :method => :get %><br/>
+<div class="page_item">
+  <%= will_paginate @books %>
+</div>
+
+<div class="page_item user_links">
+  Logged in as: <%= @user.email %> |
+  <%= link_to "Edit User Info", edit_user_registration_path, :method => :get %><br/>
+</div>
