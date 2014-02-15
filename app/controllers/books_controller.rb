@@ -8,6 +8,16 @@ class BooksController < ApplicationController
     end
 
     @book = Book.new
+    3.times { @book.chapters.build }
+  end
+
+  def edit
+    if user_signed_in? 
+      @user = current_user
+    else
+      redirect_to new_user_session_path
+    end
+    @book = @user.books.find(book_id) 
   end
 
   def create
@@ -18,10 +28,32 @@ class BooksController < ApplicationController
     end
 
     @book = @user.books.create(book_params)
-    @chapter = @book.chapters.create(chapter_params)
-    @chapter.save
-    @book.save
-    redirect_to book_path(@book)
+
+    if @book.save
+      flash[:notice] = "Successfully created survey"
+      redirect_to book_path(@book)
+    else
+      render :action => 'new'
+    end
+  end
+
+  def update
+    if user_signed_in? 
+      @user = current_user
+    else
+      redirect_to new_user_session_path
+    end
+  
+    @book = @user.books.find(book_id)
+    @book.update(book_params)
+
+    if @book.save
+      flash[:notice] = "Successfully updated book"
+      redirect_to book_path(@book)
+    else
+      render :action => 'new'
+    end
+
   end
 
   def show
@@ -45,17 +77,12 @@ class BooksController < ApplicationController
 
   private
    def book_params
-      params.require(:book).permit(:title, :author, :short_description, :long_description)
+      params.require(:book).permit(:title, :author, :short_description, :long_description, chapters_attributes: [:id, :title, :content, :position, :_destroy])
    end
 
   private
     def book_id
       params.require(:id)
-    end
-
-  private 
-    def chapter_params
-      params.require(:book).require(:chapters).permit(:title, :content, :position)
     end
 
 end

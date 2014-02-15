@@ -1,4 +1,4 @@
-<div class="fields">
+<p class="fields">
   <%= f.label :title %>
   <%= f.text_field :title %><br/>
 
@@ -8,5 +8,7 @@
   <%= f.label :position %>
   <%= f.text_field :position %><br/>
 
-  <%= link_to_remove_fields("Remove", f) %>
-</div>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to_remove_fields "remove", f %>
+
+</p>
