@@ -1,16 +1,22 @@
-<h1><%= @book.title  %></h1>
-<p>Author: <%= @book.author  %></p>
+<div class="page_item">
+	<h1><%= @book.title  %></h1>
+	<p>Author: <%= @book.author  %></p>
 
-<p>Short Description: <%= @book.short_description %>
-<p>Long Description: <%= @book.long_description %>
+	<p>Short Description: <%= @book.short_description %>
+	<p>Long Description: <%= @book.long_description %>
+</div>
 
 <% @book.chapters.each do |c| %>
-  <p>Chapter <%= c.position %>: <%= c.title %></p>
-  <p><%= c.content %></p>
+	<div class="page_item">
+		<p>Chapter <%= c.position %> - <%= c.title %>:</p>
+	</div>
+	<div class="page_item">
+		<p><%= c.content %></p>
+	</div>
 <% end %>
 
 <p>
-  <% if ! @user.books.where(id: @book.id).empty? %>
-    <%= link_to "Edit", edit_book_path(@book), :method => :get %>
-  <% end %>
+<% if ! @user.books.where(id: @book.id).empty? %>
+<%= link_to "Edit", edit_book_path(@book), :method => :get %>
+<% end %>
 </p>
