@@ -9,4 +9,8 @@
   <p><%= c.content %></p>
 <% end %>
 
-<p><%= link_to "Edit", edit_book_path(@book), :method => :get %></p>
+<p>
+  <% if ! @user.books.where(id: @book.id).empty? %>
+    <%= link_to "Edit", edit_book_path(@book), :method => :get %>
+  <% end %>
+</p>

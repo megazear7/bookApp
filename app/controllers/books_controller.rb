@@ -8,7 +8,7 @@ class BooksController < ApplicationController
     end
 
     @book = Book.new
-    3.times { @book.chapters.build }
+    @book.chapters.build
   end
 
   def edit
@@ -57,10 +57,22 @@ class BooksController < ApplicationController
   end
 
   def show
+    if user_signed_in? 
+      @user = current_user
+    else
+      redirect_to new_user_session_path
+    end
+ 
     @book = Book.find(book_id) 
   end
 
   def index
+    if user_signed_in? 
+      @user = current_user
+    else
+      redirect_to new_user_session_path
+    end
+ 
     @books = Book.all
   end
 

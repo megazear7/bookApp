@@ -2,6 +2,9 @@
   <h1><%= b.title  %></h1>
   <p>Author: <%= b.author  %></p>
   <%= link_to "Read This Book", book_path(b), :method => :get %>
+  <% if ! @user.books.where(id: b.id).empty? %>
+    | <%= link_to "Edit", edit_book_path(b), :method => :get %>
+  <% end %>
   <br/>
   <br/>
  <% end %>
