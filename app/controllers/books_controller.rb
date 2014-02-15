@@ -73,7 +73,7 @@ class BooksController < ApplicationController
       redirect_to new_user_session_path
     end
  
-    @books = Book.all
+    @books = Book.paginate(page: params[:page], per_page: 5)
   end
 
   def destroy

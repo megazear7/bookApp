@@ -46,3 +46,6 @@ end
 
 # Use devise
 gem 'devise'
+
+# Use will_paginate
+gem "will_paginate", "~> 3.0.5"

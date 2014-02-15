@@ -1,6 +1,8 @@
 <p>Your Email: <%= @user.email %></p>
 
-<% @user.books.each do |b| %>
+<%= will_paginate @books %>
+
+<% @books.each do |b| %>
   <h1><%= b.title  %></h1>
   <p>Author: <%= b.author  %></p>
   <%= link_to "Read", book_path(b), :method => :get %> |
@@ -9,7 +11,5 @@
   <br/>
   <br/>
 <% end %>
-
-
 
 <%= link_to "Edit User Info", edit_user_registration_path, :method => :get %><br/>
