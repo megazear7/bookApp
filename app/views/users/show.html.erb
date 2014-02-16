@@ -1,6 +1,8 @@
 <div class="page_item">
   <h1>Your Books:</h1>
-  <%= will_paginate @books %>
+  <% if @books.length > @per_page %>
+    <%= will_paginate @books %>
+  <% end %>
 </div>
 
 <% @books.each do |b| %>
@@ -13,9 +15,17 @@
   </div>
 <% end %>
 
-<div class="page_item">
-  <%= will_paginate @books %>
-</div>
+<% if @books.length == 0 %>
+  <div class="page_item">
+    You currently have written no books, would you like to <%= link_to "Create a New Book", new_book_path, :method => :get %>.
+  </div>
+<% end %>
+
+<% if @books.length > @per_page %>
+  <div class="page_item">
+    <%= will_paginate @books %>
+  </div>
+<% end %>
 
 <div class="page_item user_links">
   Logged in as: <%= @user.email %> |

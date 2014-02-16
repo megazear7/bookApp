@@ -59,21 +59,20 @@ class BooksController < ApplicationController
   def show
     if user_signed_in? 
       @user = current_user
-    else
-      redirect_to new_user_session_path
     end
- 
+
     @book = Book.find(book_id) 
+    @chapters = @book.chapters.paginate(page: params[:page], per_page: 1)
+    @page = params[:page]
   end
 
   def index
     if user_signed_in? 
       @user = current_user
-    else
-      redirect_to new_user_session_path
     end
- 
-    @books = Book.paginate(page: params[:page], per_page: 5)
+
+    @per_page = 5
+    @books = Book.paginate(page: params[:page], per_page: @per_page)
   end
 
   def destroy
@@ -83,7 +82,7 @@ class BooksController < ApplicationController
       redirect_to new_user_session_path
     end
 
-    @user.books.destroy(params[:id])
+    @user.books.destroy(book_id)
     redirect_to user_path(@user)
   end
 

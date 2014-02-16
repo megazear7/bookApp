@@ -7,7 +7,8 @@ class UsersController < ApplicationController
       redirect_to new_user_session_path
     end
 
-    @books = @user.books.paginate(page: params[:page], per_page: 5)
+    @per_page = 5
+    @books = @user.books.paginate(page: params[:page], per_page: @per_page)
   end
 
 end

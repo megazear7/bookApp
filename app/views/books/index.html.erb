@@ -1,20 +1,25 @@
 <div class="page_item">
   <h1>Browse Books:</h1>
-  <%= will_paginate @books %>
+  <% if @books.length > @per_page %>
+    <%= will_paginate @books %>
+  <% end %>
 </div>
 
 <% @books.each do |b| %>
   <div class="page_item book_overview">
     <h2><%= b.title  %></h2>
     <p>Author: <%= b.author  %></p>
-    <%= link_to "Read", book_path(b), :method => :get %> |
-    <%= link_to "Delete", book_path(b), :method => :delete, :data => { confirm: "Are you sure?" } %>
-    <% if ! @user.books.where(id: b.id).empty? %>
+    <p><%= b.short_description %></p>
+    <%= link_to "Read", book_path(b), :method => :get %>
+    <% if @user and ! @user.books.where(id: b.id).empty? %>
+      | <%= link_to "Delete", book_path(b), :method => :delete, :data => { confirm: "Are you sure?" } %>
       | <%= link_to "Edit", edit_book_path(b), :method => :get %>
     <% end %>
   </div>
 <% end %>
 
-<div class="page_item">
-  <%= will_paginate @books %>
-</div>
+<% if @books.length > @per_page %>
+  <div class="page_item">
+    <%= will_paginate @books %>
+  </div>
+<% end %>

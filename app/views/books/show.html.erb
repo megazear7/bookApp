@@ -1,22 +1,35 @@
 <div class="page_item">
 	<h1><%= @book.title  %></h1>
 	<p>Author: <%= @book.author  %></p>
-
-	<p>Short Description: <%= @book.short_description %>
-	<p>Long Description: <%= @book.long_description %>
+  <% if @page == 1 %>
+    <p><%= @book.long_description %></p>
+  <% end %>
 </div>
 
-<% @book.chapters.each do |c| %>
+<% @chapters.each do |c| %>
 	<div class="page_item">
-		<p>Chapter <%= c.position %> - <%= c.title %>:</p>
+    <% if @book.chapters.length > 1 %>
+      <h2>Chapter <%= c.position %> - <%= c.title %>:</h2>
+      <% if @book.chapters.length > 1 %>
+        <p><%= will_paginate @chapters %></p>
+      <% end %>
+    <% else %>
+      <p><%= c.title %> 
+    <% end %>
 	</div>
-	<div class="page_item">
+	<div class="page_item paper_back">
 		<p><%= c.content %></p>
 	</div>
 <% end %>
 
-<p>
-<% if ! @user.books.where(id: @book.id).empty? %>
-<%= link_to "Edit", edit_book_path(@book), :method => :get %>
+<% if @book.chapters.length > 1 %>
+  <div class="page_item">
+    Chapters: <%= will_paginate @chapters %>
+  </div>
 <% end %>
-</p>
+
+<% if @user and ! @user.books.where(id: @book.id).empty? %>
+  <div class="page_item">
+    <%= link_to "Edit This Book", edit_book_path(@book), :method => :get %>
+  </div>
+<% end %>
