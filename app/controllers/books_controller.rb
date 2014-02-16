@@ -62,7 +62,7 @@ class BooksController < ApplicationController
     end
 
     @book = Book.find(book_id) 
-    @chapters = @book.chapters.paginate(page: params[:page], per_page: 1)
+    @chapters = @book.chapters.order(:position).paginate(page: params[:page], per_page: 1)
     @page = params[:page]
   end
 
